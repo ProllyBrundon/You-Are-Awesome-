@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     
     var imageNumber = 0
     var messageNumber = 0
+    var totalNumberOfImages = 9
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,19 +28,29 @@ class ViewController: UIViewController {
                         "You Make Me Smile!",
                         "I Think You're Fantastic!"]
         
-        messageLabel.text = messages[messageNumber]
+        var newMessage = messages[Int.random(in: 0...messages.count-1)]
+        while messageLabel.text == newMessage {
+            print("*** We had a repeating value. Both newMessage and messageLabel.text = \(newMessage) and \(messageLabel.text!)")
+            newMessage = messages[Int.random(in: 0...messages.count-1)]
+        }
+        messageLabel.text = newMessage
+        
+        
+        imageView.image = UIImage(named: "image\(Int.random(in: 0...totalNumberOfImages))")
+        
+//        messageLabel.text = messages[messageNumber]
         //messageNumber =+ 1 is the same as messageNumber = messageNumber + 1
-        messageNumber = messageNumber + 1
-        
-        if messageNumber == messages.count {
-            messageNumber = 0}
-        
-        // let imageName = "image" + String(imageNumber)
-        let imageName = "image\(imageNumber)"
-        imageView.image = UIImage(named: imageName)
-        imageNumber = imageNumber + 1
-        if imageNumber == 10 {
-            imageNumber = 0}
+//        messageNumber = messageNumber + 1
+//
+//        if messageNumber == messages.count {
+//            messageNumber = 0}
+//
+//        // let imageName = "image" + String(imageNumber)
+//        let imageName = "image\(imageNumber)"
+//        imageView.image = UIImage(named: imageName)
+//        imageNumber = imageNumber + 1
+//        if imageNumber == 10 {
+//            imageNumber = 0}
             }
         }
         
