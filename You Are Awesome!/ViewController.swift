@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
     @IBOutlet weak var messageLabel: UILabel!
@@ -14,6 +15,7 @@ class ViewController: UIViewController {
     var imageNumber = -1
     var messageNumber = -1
     var totalNumberOfImages = 9
+    var audioPlayer: AVAudioPlayer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +44,19 @@ class ViewController: UIViewController {
         imageNumber = newImageNumber
         imageView.image = UIImage(named: "image\(imageNumber)")
         
+        if let sound = NSDataAsset(name: "Sound0") {
+            do {
+                try audioPlayer = AVAudioPlayer(data: sound.data)
+                audioPlayer.play()
+            } catch {
+                print("😡 ERROR: \(error.localizedDescription) Could not read data from file Sound0")
+            }
+        } else {
+            print("😡 ERROR: Could not read data from file Sound0")
+        }
+    }
+}
+
 //        messageLabel.text = messages[messageNumber]
         //messageNumber =+ 1 is the same as messageNumber = messageNumber + 1
 //        messageNumber = messageNumber + 1
@@ -55,8 +70,6 @@ class ViewController: UIViewController {
 //        imageNumber = imageNumber + 1
 //        if imageNumber == 10 {
 //            imageNumber = 0}
-            }
-        }
         
         //        let awesomeMessage = "You Are Awesome!"
         //        let greatMessage = "You Are Great!"
